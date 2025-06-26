@@ -14,31 +14,40 @@ class LoveLetterPuzzle {
     this.currentPuzzle = 0;
     this.puzzlesData = [
       {
-        solution: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        rows: 2,
+        cols: 2,
+        solution: Array.from({ length: 4 }, (_, i) => i + 1),
         messageTitle: "Where It All Began...",
         messageText:
           "Do you remember our first date? The way you smiled made my heart skip a beat, and I knew right then that you were someone special. That moment changed my life forever.",
       },
       {
-        solution: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        rows: 3,
+        cols: 3,
+        solution: Array.from({ length: 9 }, (_, i) => i + 1),
         messageTitle: "Magic in the Air...",
         messageText:
           "Under the starlit sky, when our lips first met, time seemed to stop. That kiss was the beginning of a love story I never want to end. You tasted like happiness and forever.",
       },
       {
-        solution: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        messageTitle: "Every Journey With You...",
+        rows: 4,
+        cols: 4,
+        solution: Array.from({ length: 16 }, (_, i) => i + 1),
         messageText:
           "From spontaneous road trips to quiet movie nights, every adventure is better with you by my side. You turn ordinary moments into extraordinary memories.",
       },
       {
-        solution: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        rows: 5,
+        cols: 5,
+        solution: Array.from({ length: 25 }, (_, i) => i + 1),
         messageTitle: "Perfect Peace...",
         messageText:
           "Those slow Sunday mornings in your arms are my favorite kind of paradise. Coffee tastes better, the sun shines brighter, and life feels complete when I wake up next to you.",
       },
       {
-        solution: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        rows: 6,
+        cols: 6,
+        solution: Array.from({ length: 36 }, (_, i) => i + 1),
         messageTitle: "My Promise to You...",
         messageText:
           "This is my promise: to love you through every season, to be your partner in every dream, and to choose you every single day. You are my always and forever.",
@@ -78,27 +87,38 @@ class LoveLetterPuzzle {
     puzzleBoard.innerHTML = "";
 
     // Create shuffled numbers for puzzle pieces
-    this.currentPuzzleState = this.shufflePuzzle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    const { rows, cols } = this.puzzlesData[this.currentPuzzle];
+    const totalPieces = rows * cols;
+
+    this.currentPuzzleState = this.shufflePuzzle(
+      Array.from({ length: totalPieces }, (_, i) => i + 1)
+    );
+
+    puzzleBoard.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
     // Create puzzle pieces
     this.currentPuzzleState.forEach((number, index) => {
       const piece = document.createElement("div");
       piece.className = "puzzle-piece";
-
-      const puzzleNumber = this.currentPuzzle + 1;
-      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${number}.png')`;
-      piece.style.backgroundSize = "cover";
-      piece.style.backgroundPosition = "center";
-      piece.style.backgroundRepeat = "no-repeat";
-
       piece.dataset.number = number;
       piece.dataset.index = index;
+
+      const puzzleNumber = this.currentPuzzle + 1;
+      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${number}.jpg')`;
+      piece.style.backgroundSize = `${cols * 100}% ${rows * 100}%`;
+      piece.style.backgroundPosition = `
+      ${((number - 1) % cols) * (100 / (cols - 1))}%
+      ${Math.floor((number - 1) / cols) * (100 / (rows - 1))}%
+    `;
+      piece.style.backgroundRepeat = "no-repeat";
 
       piece.addEventListener("click", () =>
         this.handlePieceClick(piece, index)
       );
       puzzleBoard.appendChild(piece);
     });
+
+    this.updateProgress();
   }
 
   shufflePuzzle(array) {
@@ -148,8 +168,12 @@ class LoveLetterPuzzle {
     const img1 = this.currentPuzzleState[index1];
     const img2 = this.currentPuzzleState[index2];
 
-    pieces[index1].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
-    pieces[index2].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
+    pieces[
+      index1
+    ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
+    pieces[
+      index2
+    ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
 
     // Optional animation
     pieces[index1].style.transform = "scale(1.1)";
