@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Apology" />
+    <meta property="og:description" content="7 years, 7 messages" />
+    <meta property="og:image" content="assets/thumbnail.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/icon.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>Jigsaw</title>
+</head>
+<body>
+    <div id="loader">
+        <div class="heart"></div>
+    </div>
+    <div class="container">
+        <!-- Header -->
+      <header class="header">
+        <h1 class="main-title">Help me fix Us!</h1>
+      </header>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">Puzzle 1 of 5</span>
+      </div>
+
+      <!-- Current Puzzle Display -->
+      <div class="puzzle-container" id="puzzleContainer">
+        <!-- Hidden Message (revealed after completion) -->
+        <div class="message-reveal" id="messageReveal">
+          <div class="message-content">
+            <h3 class="message-title" id="messageTitle">Instructions</h3>
+            <p class="message-text" id="messageText">
+                You need to solve 5 jigsaw puzzles. Each puzzle is a broken photo of us.
+                Your goal is to re arrange the pieces to form the complete picture.
+                Each puzzle has 9 pieces, and they are randomly shuffled.
+                
+                Tap two pieces to swap them. When all pieces are in the right place,
+                the picture will be complete, and a message will be revealed.
+                After finishing all 5, my final letter to you will be unlocked.
+                Take your time. Fix each piece. Fix the picture. Fix us.
+            </p>
+            <button class="next-button" id="nextButton">Next</button>
+          </div>
+        </div>
+
+        <!-- Puzzle Board -->
+        <div class="puzzle-board" id="puzzleBoard">
+          <!-- Puzzle pieces will be dynamically generated here -->
+        </div>
+      </div>
+
+      <!-- Final Love Letter (shown after all puzzles) -->
+      <div class="final-letter" id="finalLetter">
+        <div class="letter-content">
+          <h2 class="letter-title">My Complete Heart...</h2>
+          <div class="letter-text">
+            <p>My dearest love,</p>
+            <p>You've just journeyed through five precious memories that represent the depth of my love for you. Each puzzle piece, like each moment we've shared, comes together to create something beautiful and complete.</p>
+            <p>You are my greatest adventure, my safest harbor, and my sweetest dream come true. Thank you for being the missing piece that made my heart whole.</p>
+            <p>I love you more than words could ever express, more than the stars in the sky, and more than all the puzzle pieces in the world combined.</p>
+            <p class="signature">Forever yours,<br>[Your Name]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
