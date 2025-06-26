@@ -141,8 +141,13 @@ body {
   border-radius: 10px;
 }
 
+.puzzle-board.correct {
+  gap: 0;
+  overflow: hidden;
+}
+
 .puzzle-piece {
-  width: 100%;
+  position: relative;
   aspect-ratio: 1;
   background-color: #D63051;
   background-size: cover;
@@ -161,11 +166,25 @@ body {
 .puzzle-piece.correct {
   background: #FFC756;
   animation: pieceComplete 0.5s ease;
+  border-radius: 0;
 }
 
 .puzzle-piece.selected {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.piece-label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  pointer-events: none;
 }
 
 /* Message Reveal */
@@ -217,11 +236,9 @@ body {
 /* Final Letter */
 .final-letter {
   display: none;
-  background: rgba(255,255,255,0.95);
+  background: white;
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-  backdrop-filter: blur(10px);
   animation: fadeInScale 1s ease-out;
 }
 
@@ -230,18 +247,16 @@ body {
 }
 
 .letter-title {
-  font-size: 3rem;
-  color: #d63384;
-  text-align: center;
+  font-size: 2rem;
+  color: #D1193E;
+  text-align: start;
   margin-bottom: 30px;
 }
 
 .letter-text {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: #2d3436;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .letter-text p {
@@ -249,17 +264,10 @@ body {
 }
 
 .signature {
-  text-align: center;
-  font-size: 1.5rem;
+  text-align: start;
+  font-size: 1rem;
   color: #d63384;
   margin-top: 30px !important;
-}
-
-.heart-animation {
-  text-align: center;
-  font-size: 3rem;
-  margin-top: 20px;
-  animation: heartBeat 2s infinite;
 }
 
 /* Celebration Effects */

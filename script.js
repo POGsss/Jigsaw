@@ -33,6 +33,7 @@ class LoveLetterPuzzle {
         rows: 4,
         cols: 4,
         solution: Array.from({ length: 16 }, (_, i) => i + 1),
+        messageTitle: "Perfect Peace...",
         messageText:
           "From spontaneous road trips to quiet movie nights, every adventure is better with you by my side. You turn ordinary moments into extraordinary memories.",
       },
@@ -85,6 +86,7 @@ class LoveLetterPuzzle {
 
     // Clear previous puzzle
     puzzleBoard.innerHTML = "";
+    puzzleBoard.classList.remove("correct");
 
     // Create shuffled numbers for puzzle pieces
     const { rows, cols } = this.puzzlesData[this.currentPuzzle];
@@ -104,13 +106,17 @@ class LoveLetterPuzzle {
       piece.dataset.index = index;
 
       const puzzleNumber = this.currentPuzzle + 1;
-      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${number}.jpg')`;
-      piece.style.backgroundSize = `${cols * 100}% ${rows * 100}%`;
-      piece.style.backgroundPosition = `
-      ${((number - 1) % cols) * (100 / (cols - 1))}%
-      ${Math.floor((number - 1) / cols) * (100 / (rows - 1))}%
-    `;
+      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${number}.png')`;
+      piece.style.backgroundSize = "cover";
+      piece.style.backgroundPosition = "center";
       piece.style.backgroundRepeat = "no-repeat";
+      piece.style.backgroundRepeat = "no-repeat";
+
+      // Add number overlay for easier solving
+      const label = document.createElement("span");
+      label.className = "piece-label";
+      label.textContent = number;
+      piece.appendChild(label);
 
       piece.addEventListener("click", () =>
         this.handlePieceClick(piece, index)
@@ -164,10 +170,10 @@ class LoveLetterPuzzle {
     const pieces = document.querySelectorAll(".puzzle-piece");
     const puzzleNumber = this.currentPuzzle + 1;
 
-    // Swap the background images visually
     const img1 = this.currentPuzzleState[index1];
     const img2 = this.currentPuzzleState[index2];
 
+    // Swap background images
     pieces[
       index1
     ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
@@ -175,10 +181,13 @@ class LoveLetterPuzzle {
       index2
     ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
 
+    // 🔁 Swap label numbers (span.textContent)
+    pieces[index1].querySelector(".piece-label").textContent = img1;
+    pieces[index2].querySelector(".piece-label").textContent = img2;
+
     // Optional animation
     pieces[index1].style.transform = "scale(1.1)";
     pieces[index2].style.transform = "scale(1.1)";
-
     setTimeout(() => {
       pieces[index1].style.transform = "";
       pieces[index2].style.transform = "";
@@ -200,7 +209,12 @@ class LoveLetterPuzzle {
     // Mark all pieces as correct
     document.querySelectorAll(".puzzle-piece").forEach((piece) => {
       piece.classList.add("correct");
+      piece.style.pointerEvents = "none";
     });
+
+    // Set Board To Correct State
+    const puzzleBoard = document.getElementById("puzzleBoard");
+    puzzleBoard.classList.add("correct");
 
     // Show message after animation
     setTimeout(() => {
