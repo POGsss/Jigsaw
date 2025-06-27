@@ -1,3 +1,4 @@
+// Event Listener For Window Load
 window.addEventListener("load", function () {
   setTimeout(loaded, 2500);
 
@@ -9,9 +10,17 @@ window.addEventListener("load", function () {
   }
 });
 
+// Event Listener For Document Load
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize New LoveLetterPuzzle Class
+  new LoveLetterPuzzle();
+});
+
+// Love Letter Class
 class LoveLetterPuzzle {
+  // Class Constructor
   constructor() {
-    this.currentPuzzle = 0;
+    // Puzzle Data Properties
     this.puzzlesData = [
       {
         rows: 2,
@@ -55,40 +64,55 @@ class LoveLetterPuzzle {
       },
     ];
 
+    // Puzzle Message Properties
+    this.transitionMessages = [
+      {
+        title: "Ready for the Next One?",
+        text: "Each picture tells a story. Let’s rebuild another memory together.",
+      },
+      {
+        title: "Deeper into Us...",
+        text: "Every piece brings us closer. Let’s solve the next one hand in hand.",
+      },
+      {
+        title: "Don’t Stop Now ❤️",
+        text: "There’s beauty in every broken piece — you’re doing great!",
+      },
+      {
+        title: "Almost There...",
+        text: "Another memory waits to be pieced back together. Let’s do it.",
+      },
+    ];
+    
+    // Basic Properties
     this.currentPuzzleState = [];
     this.selectedPiece = null;
+    this.hintTimeout = null;
+    this.currentPuzzle = 0;
+    this.hintDelay = 5000;
     this.init();
   }
 
+  // Initialize Base Functions
   init() {
     this.updateProgress();
     this.createPuzzle();
     this.setupEventListeners();
   }
 
-  updateProgress() {
-    const progressFill = document.getElementById("progressFill");
-    const progressText = document.getElementById("progressText");
-    const progress = ((this.currentPuzzle + 1) / this.puzzlesData.length) * 100;
-
-    progressFill.style.width = `${progress}%`;
-    progressText.textContent = `Puzzle ${this.currentPuzzle + 1} of ${
-      this.puzzlesData.length
-    }`;
-  }
-
+  // Create Puzzle Function
   createPuzzle() {
+    clearTimeout(this.hintTimeout);
+
     const nextButton = document.getElementById("nextButton");
+    const toggleButton = document.getElementById("toggleButton");
     const puzzleBoard = document.getElementById("puzzleBoard");
 
-    // Disable Message and Next Button
+    toggleButton.disabled = true;
     nextButton.disabled = true;
-
-    // Clear previous puzzle
     puzzleBoard.innerHTML = "";
     puzzleBoard.classList.remove("correct");
 
-    // Create shuffled numbers for puzzle pieces
     const { rows, cols } = this.puzzlesData[this.currentPuzzle];
     const totalPieces = rows * cols;
 
@@ -98,7 +122,6 @@ class LoveLetterPuzzle {
 
     puzzleBoard.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
-    // Create puzzle pieces
     this.currentPuzzleState.forEach((number, index) => {
       const piece = document.createElement("div");
       piece.className = "puzzle-piece";
@@ -112,10 +135,10 @@ class LoveLetterPuzzle {
       piece.style.backgroundRepeat = "no-repeat";
       piece.style.backgroundRepeat = "no-repeat";
 
-      // Add number overlay for easier solving
       const label = document.createElement("span");
       label.className = "piece-label";
       label.textContent = number;
+      label.style.display = "none";
       piece.appendChild(label);
 
       piece.addEventListener("click", () =>
@@ -124,9 +147,34 @@ class LoveLetterPuzzle {
       puzzleBoard.appendChild(piece);
     });
 
+    this.hintTimeout = setTimeout(() => {
+      toggleButton.disabled = false;
+    }, this.hintDelay);
+
     this.updateProgress();
   }
 
+  // Auto Solve Puzzle Function
+  autoSolvePuzzle() {
+    const { solution } = this.puzzlesData[this.currentPuzzle];
+    this.currentPuzzleState = [...solution];
+
+    const pieces = document.querySelectorAll(".puzzle-piece");
+    const puzzleNumber = this.currentPuzzle + 1;
+
+    pieces.forEach((piece, index) => {
+      const correctNumber = solution[index];
+
+      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${correctNumber}.png')`;
+      piece.querySelector(".piece-label").textContent = correctNumber;
+      piece.classList.remove("selected");
+      piece.dataset.number = correctNumber;
+    });
+
+    this.checkCompletion();
+  }
+
+  // Shuffle Puzzle Function
   shufflePuzzle(array) {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -136,56 +184,45 @@ class LoveLetterPuzzle {
     return shuffled;
   }
 
+  // Handle Puzzle Piece Click Function
   handlePieceClick(piece, index) {
     if (piece.classList.contains("correct")) return;
 
-    // Remove previous selection
     document.querySelectorAll(".puzzle-piece").forEach((p) => {
       p.classList.remove("selected");
     });
 
     if (this.selectedPiece === null) {
-      // Select first piece
       this.selectedPiece = index;
       piece.classList.add("selected");
     } else if (this.selectedPiece === index) {
-      // Deselect if clicking same piece
       this.selectedPiece = null;
     } else {
-      // Swap pieces
       this.swapPieces(this.selectedPiece, index);
       this.selectedPiece = null;
       this.checkCompletion();
     }
   }
 
+  // Swap Puzzle Piece Function
   swapPieces(index1, index2) {
-    // Swap in state array
     [this.currentPuzzleState[index1], this.currentPuzzleState[index2]] = [
       this.currentPuzzleState[index2],
       this.currentPuzzleState[index1],
     ];
 
-    // Update DOM
     const pieces = document.querySelectorAll(".puzzle-piece");
     const puzzleNumber = this.currentPuzzle + 1;
 
     const img1 = this.currentPuzzleState[index1];
     const img2 = this.currentPuzzleState[index2];
 
-    // Swap background images
-    pieces[
-      index1
-    ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
-    pieces[
-      index2
-    ].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
+    pieces[index1].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
+    pieces[index2].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
 
-    // 🔁 Swap label numbers (span.textContent)
     pieces[index1].querySelector(".piece-label").textContent = img1;
     pieces[index2].querySelector(".piece-label").textContent = img2;
 
-    // Optional animation
     pieces[index1].style.transform = "scale(1.1)";
     pieces[index2].style.transform = "scale(1.1)";
     setTimeout(() => {
@@ -194,6 +231,7 @@ class LoveLetterPuzzle {
     }, 200);
   }
 
+  // Check Completion Function
   checkCompletion() {
     const solution = this.puzzlesData[this.currentPuzzle].solution;
     const isComplete = this.currentPuzzleState.every(
@@ -205,28 +243,54 @@ class LoveLetterPuzzle {
     }
   }
 
+  // Complete Puzzle Function
   completePuzzle() {
-    // Mark all pieces as correct
-    document.querySelectorAll(".puzzle-piece").forEach((piece) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    this.toggleLabels(false);
+    
+    const puzzleBoard = document.getElementById("puzzleBoard");
+    const pieces = document.querySelectorAll(".puzzle-piece");
+    
+    puzzleBoard.classList.add("correct");
+
+    pieces.forEach(piece => {
       piece.classList.add("correct");
       piece.style.pointerEvents = "none";
     });
 
-    // Set Board To Correct State
-    const puzzleBoard = document.getElementById("puzzleBoard");
-    puzzleBoard.classList.add("correct");
-
-    // Show message after animation
     setTimeout(() => {
       this.showMessage();
     }, 1000);
   }
 
+  // Update Progress Function
+  updateProgress() {
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+    const progress = ((this.currentPuzzle + 1) / this.puzzlesData.length) * 100;
+
+    progressFill.style.width = `${progress}%`;
+    progressText.textContent = `${this.currentPuzzle + 1} of ${
+      this.puzzlesData.length
+    }`;
+  }
+
+  // Toggle Labels Function
+  toggleLabels(show = true) {
+    const labels = document.querySelectorAll(".piece-label");
+    labels.forEach((label) => {
+      label.style.display = show ? "block" : "none";
+    });
+  }
+
+  // Show Message Function
   showMessage() {
+    const toggleButton = document.getElementById("toggleButton");
+    const nextButton = document.getElementById("nextButton");
     const messageTitle = document.getElementById("messageTitle");
     const messageText = document.getElementById("messageText");
-    const nextButton = document.getElementById("nextButton");
 
+    toggleButton.disabled = true;
     nextButton.disabled = false;
 
     const currentPuzzleData = this.puzzlesData[this.currentPuzzle];
@@ -235,6 +299,7 @@ class LoveLetterPuzzle {
     messageText.textContent = currentPuzzleData.messageText;
   }
 
+  // Next Puzzle Function
   nextPuzzle() {
     this.currentPuzzle++;
 
@@ -243,23 +308,54 @@ class LoveLetterPuzzle {
     } else {
       this.updateProgress();
       this.createPuzzle();
+      this.transitionMessage();
     }
   }
 
+  // Transition Message Function
+  transitionMessage() {
+    const { title, text } = this.transitionMessages[this.currentPuzzle - 1];
+
+    const messageTitle = document.getElementById("messageTitle");
+    const messageText = document.getElementById("messageText");
+    const nextButton = document.getElementById("nextButton");
+
+    messageTitle.textContent = title;
+    messageText.textContent = text;
+    nextButton.disabled = true;
+  }
+
+  // Show Final Letter Function
   showFinalLetter() {
-    const puzzleContainer = document.getElementById("puzzleContainer");
+    const gameContainer = document.getElementById("gameContainer");
     const finalLetter = document.getElementById("finalLetter");
 
-    puzzleContainer.style.display = "none";
+    gameContainer.style.display = "none";
     finalLetter.classList.add("show");
   }
 
+  // Set Up Event Listeners
   setupEventListeners() {
     const nextButton = document.getElementById("nextButton");
+    const playButton = document.getElementById("playButton");
+    const toggleButton = document.getElementById("toggleButton");
+    const solveButton = document.getElementById("solveButton");
+
     nextButton.addEventListener("click", () => this.nextPuzzle());
+    
+    playButton.addEventListener("click", () => {
+      document.getElementById("menuContainer").classList.remove("show");
+      document.getElementById("gameContainer").classList.add("show");
+      this.createPuzzle();
+    });
+
+    toggleButton.addEventListener("click", () => {
+      const anyVisible = document.querySelector(".piece-label")?.style.display !== "none";
+      this.toggleLabels(!anyVisible);
+    });
+
+    solveButton.addEventListener("click", () => {
+      this.autoSolvePuzzle();
+    });
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  new LoveLetterPuzzle();
-});

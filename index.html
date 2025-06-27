@@ -16,47 +16,44 @@
     <div id="loader">
         <div class="heart"></div>
     </div>
-    <div class="container">
-        <!-- Header -->
-      <header class="header">
-        <h1 class="main-title">Help me fix Us!</h1>
-      </header>
 
-      <!-- Progress Bar -->
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <span class="progress-text" id="progressText">Puzzle 1 of 5</span>
+    <div class="container">
+      <div class="menu-container show" id="menuContainer">
+        <img class="menu-image" src="assets/image.png" alt="">
+        <button class="play-button" id="playButton">Play</button>
       </div>
 
-      <!-- Current Puzzle Display -->
-      <div class="puzzle-container" id="puzzleContainer">
-        <!-- Hidden Message (revealed after completion) -->
-        <div class="message-reveal" id="messageReveal">
-          <div class="message-content">
-            <h3 class="message-title" id="messageTitle">Instructions</h3>
-            <p class="message-text" id="messageText">
-                You need to solve 5 jigsaw puzzles. Each puzzle is a broken photo of us.
-                Your goal is to re arrange the pieces to form the complete picture.
-                Each puzzle are randomly shuffled and gets harder as you progress.
+      <div class="game-container" id="gameContainer">
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressText">1 of 5</span>
+        </div>
 
+        <div class="puzzle-container" id="puzzleContainer">
+          <div class="puzzle-board" id="puzzleBoard">
+          </div>
+
+          <div class="message-reveal" id="messageReveal">
+            <div class="message-content">
+              <h3 class="message-title" id="messageTitle">Instructions</h3>
+              <p class="message-text" id="messageText">
+                Your goal is to help me solve these 5 jigsaw puzzles.
+                Each puzzle is a broken photo of us that you need to re-arrange.
+                The puzzle pieces are randomly shuffled and get harder as you progress.
+                <br><br>
                 Tap two pieces to swap them. When all pieces are in the right place,
                 the picture will be complete, and a message will be revealed.
-                After finishing all 5, my final letter to you will be unlocked.
-                Take your time. Fix each piece. Fix the picture. Fix us.
-            </p>
-            <button class="next-button" id="nextButton">Next</button>
+              </p>
+              <button class="toggle-button" id="toggleButton">Toggle Labels</button>
+              <button class="next-button" id="nextButton">Next</button>
+              <button class="solve-button" id="solveButton">Cheat</button>
+            </div>
           </div>
-        </div>
-
-        <!-- Puzzle Board -->
-        <div class="puzzle-board" id="puzzleBoard">
-          <!-- Puzzle pieces will be dynamically generated here -->
         </div>
       </div>
 
-      <!-- Final Love Letter (shown after all puzzles) -->
       <div class="final-letter" id="finalLetter">
         <div class="letter-content">
           <h2 class="letter-title">My Complete Heart...</h2>
@@ -65,10 +62,11 @@
             <p>You've just journeyed through five precious memories that represent the depth of my love for you. Each puzzle piece, like each moment we've shared, comes together to create something beautiful and complete.</p>
             <p>You are my greatest adventure, my safest harbor, and my sweetest dream come true. Thank you for being the missing piece that made my heart whole.</p>
             <p>I love you more than words could ever express, more than the stars in the sky, and more than all the puzzle pieces in the world combined.</p>
-            <p class="signature">Forever yours,<br>[Your Name]</p>
+            <p class="signature">Forever yours,<br>Donkey</p>
           </div>
         </div>
       </div>
+
     </div>
     <script src="script.js"></script>
 </body>
