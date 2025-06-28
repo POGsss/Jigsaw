@@ -26,76 +26,70 @@ class LoveLetterPuzzle {
         rows: 2,
         cols: 2,
         solution: Array.from({ length: 4 }, (_, i) => i + 1),
-        messageTitle: "Where It All Began...",
-        messageText:
-          "Do you remember our first date? The way you smiled made my heart skip a beat, and I knew right then that you were someone special. That moment changed my life forever.",
+        messageTitle: "Picture 01",
+        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
       },
       {
         rows: 3,
         cols: 3,
         solution: Array.from({ length: 9 }, (_, i) => i + 1),
-        messageTitle: "Magic in the Air...",
-        messageText:
-          "Under the starlit sky, when our lips first met, time seemed to stop. That kiss was the beginning of a love story I never want to end. You tasted like happiness and forever.",
+        messageTitle: "Picture 02",
+        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
       },
       {
         rows: 4,
         cols: 4,
         solution: Array.from({ length: 16 }, (_, i) => i + 1),
-        messageTitle: "Perfect Peace...",
-        messageText:
-          "From spontaneous road trips to quiet movie nights, every adventure is better with you by my side. You turn ordinary moments into extraordinary memories.",
+        messageTitle: "Picture 03",
+        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
       },
       {
         rows: 5,
         cols: 5,
         solution: Array.from({ length: 25 }, (_, i) => i + 1),
-        messageTitle: "Perfect Peace...",
-        messageText:
-          "Those slow Sunday mornings in your arms are my favorite kind of paradise. Coffee tastes better, the sun shines brighter, and life feels complete when I wake up next to you.",
+        messageTitle: "Picture 04",
+        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
       },
       {
         rows: 6,
         cols: 6,
         solution: Array.from({ length: 36 }, (_, i) => i + 1),
-        messageTitle: "My Promise to You...",
-        messageText:
-          "This is my promise: to love you through every season, to be your partner in every dream, and to choose you every single day. You are my always and forever.",
+        messageTitle: "Picture 05",
+        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
       },
     ];
 
     // Puzzle Message Properties
     this.transitionMessages = [
       {
-        title: "Ready for the Next One?",
-        text: "Each picture tells a story. Let’s rebuild another memory together.",
+        title: "Congrats 01",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
       },
       {
-        title: "Deeper into Us...",
-        text: "Every piece brings us closer. Let’s solve the next one hand in hand.",
+        title: "Congrats 02",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
       },
       {
-        title: "Don’t Stop Now ❤️",
-        text: "There’s beauty in every broken piece — you’re doing great!",
+        title: "Congrats 03",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
       },
       {
-        title: "Almost There...",
-        text: "Another memory waits to be pieced back together. Let’s do it.",
+        title: "Congrats 04",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
       },
     ];
     
     // Basic Properties
     this.currentPuzzleState = [];
-    this.selectedPiece = null;
-    this.hintTimeout = null;
     this.currentPuzzle = 0;
     this.hintDelay = 5000;
+    this.hintTimeout = null;
+    this.selectedPiece = null;
     this.init();
   }
 
   // Initialize Base Functions
   init() {
-    this.updateProgress();
     this.createPuzzle();
     this.setupEventListeners();
   }
@@ -129,10 +123,9 @@ class LoveLetterPuzzle {
       piece.dataset.index = index;
 
       const puzzleNumber = this.currentPuzzle + 1;
-      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${number}.png')`;
+      piece.style.backgroundImage = `url("assets/puzzle${puzzleNumber}/${number}.png")`;
       piece.style.backgroundSize = "cover";
       piece.style.backgroundPosition = "center";
-      piece.style.backgroundRepeat = "no-repeat";
       piece.style.backgroundRepeat = "no-repeat";
 
       const label = document.createElement("span");
@@ -148,10 +141,10 @@ class LoveLetterPuzzle {
     });
 
     this.hintTimeout = setTimeout(() => {
-      toggleButton.disabled = false;
+      if (!puzzleBoard.classList.contains("correct")) {
+        toggleButton.disabled = false;
+      }
     }, this.hintDelay);
-
-    this.updateProgress();
   }
 
   // Auto Solve Puzzle Function
@@ -165,7 +158,7 @@ class LoveLetterPuzzle {
     pieces.forEach((piece, index) => {
       const correctNumber = solution[index];
 
-      piece.style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${correctNumber}.png')`;
+      piece.style.backgroundImage = `url("assets/puzzle${puzzleNumber}/${correctNumber}.png")`;
       piece.querySelector(".piece-label").textContent = correctNumber;
       piece.classList.remove("selected");
       piece.dataset.number = correctNumber;
@@ -217,8 +210,8 @@ class LoveLetterPuzzle {
     const img1 = this.currentPuzzleState[index1];
     const img2 = this.currentPuzzleState[index2];
 
-    pieces[index1].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img1}.png')`;
-    pieces[index2].style.backgroundImage = `url('assets/puzzle${puzzleNumber}/${img2}.png')`;
+    pieces[index1].style.backgroundImage = `url("assets/puzzle${puzzleNumber}/${img1}.png")`;
+    pieces[index2].style.backgroundImage = `url("assets/puzzle${puzzleNumber}/${img2}.png")`;
 
     pieces[index1].querySelector(".piece-label").textContent = img1;
     pieces[index2].querySelector(".piece-label").textContent = img2;
@@ -249,7 +242,10 @@ class LoveLetterPuzzle {
     this.toggleLabels(false);
     
     const puzzleBoard = document.getElementById("puzzleBoard");
+    const toggleButton = document.getElementById("toggleButton");
     const pieces = document.querySelectorAll(".puzzle-piece");
+
+    toggleButton.disabled = true;
     
     puzzleBoard.classList.add("correct");
 
@@ -260,6 +256,8 @@ class LoveLetterPuzzle {
 
     setTimeout(() => {
       this.showMessage();
+      this.updateProgress();
+      this.triggerConfetti();
     }, 1000);
   }
 
@@ -270,9 +268,12 @@ class LoveLetterPuzzle {
     const progress = ((this.currentPuzzle + 1) / this.puzzlesData.length) * 100;
 
     progressFill.style.width = `${progress}%`;
-    progressText.textContent = `${this.currentPuzzle + 1} of ${
-      this.puzzlesData.length
-    }`;
+
+    if (this.currentPuzzle + 1  >= this.puzzlesData.length) {
+      progressText.textContent = "Solved";
+    } else {
+      progressText.textContent = `${this.currentPuzzle + 2} of ${this.puzzlesData.length}`;
+    }
   }
 
   // Toggle Labels Function
@@ -306,7 +307,6 @@ class LoveLetterPuzzle {
     if (this.currentPuzzle >= this.puzzlesData.length) {
       this.showFinalLetter();
     } else {
-      this.updateProgress();
       this.createPuzzle();
       this.transitionMessage();
     }
@@ -332,6 +332,68 @@ class LoveLetterPuzzle {
 
     gameContainer.style.display = "none";
     finalLetter.classList.add("show");
+
+    this.triggerFinalConfetti();
+  }
+
+  // Trigger Confetti Function
+  triggerConfetti() {
+    const duration = 2500;
+    const end = Date.now() + duration;
+
+    const colors = ["#ffffff", "#ffc756", "#d1193e"];
+
+    const frame = () => { confetti({
+        particleCount: 5,
+        angle: 45,
+        spread: 150,
+        origin: { x: 0, y: 1 },
+        colors: colors,
+        scalar: 1.5,
+      });
+
+      confetti({
+        particleCount: 5,
+        angle: 135,
+        spread: 150,
+        origin: { x: 1, y: 1 },
+        colors: colors,
+        scalar: 1.5,
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
+  }
+
+  // Trigger Final Confetti Function
+  triggerFinalConfetti() {
+    const duration = 5000;
+    const animationEnd = Date.now() + duration;
+    const defaults = {
+      origin: { y: 0 },
+      colors: ["#ffffff", "#ffc756", "#d1193e"],
+      scalar: 1.5,
+    };
+
+    function frame() {
+      confetti({
+        ...defaults,
+        particleCount: 10,
+        angle: 90,
+        spread: 150,
+        startVelocity: 30,
+      });
+
+      if (Date.now() < animationEnd) {
+        requestAnimationFrame(frame);
+      }
+    }
+
+    frame();
   }
 
   // Set Up Event Listeners

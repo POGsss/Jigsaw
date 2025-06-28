@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="assets/icon.ico">
     <link rel="stylesheet" href="style.css">
-    <title>Jigsaw</title>
+    <title>Puzzle</title>
 </head>
 <body>
     <div id="loader">
         <div class="heart"></div>
     </div>
-
+    <div id="confetti">
+    </div>
     <div class="container">
       <div class="menu-container show" id="menuContainer">
         <img class="menu-image" src="assets/image.png" alt="">
@@ -39,16 +40,15 @@
             <div class="message-content">
               <h3 class="message-title" id="messageTitle">Instructions</h3>
               <p class="message-text" id="messageText">
-                Your goal is to help me solve these 5 jigsaw puzzles.
-                Each puzzle is a broken photo of us that you need to re-arrange.
-                The puzzle pieces are randomly shuffled and get harder as you progress.
+                There are 5 puzzles to solve, and each one is a photo of us. The pieces are all mixed up, and your job is to put them back in the right place.
                 <br><br>
-                Tap two pieces to swap them. When all pieces are in the right place,
-                the picture will be complete, and a message will be revealed.
+                The puzzles will get a bit harder as you go, but don’t worry I’ll be here to help you out. You don’t have to do it alone. We’ll solve this together, just like we always do.
+                <br><br>
+                I know you can do it, Goodluck!
               </p>
-              <button class="toggle-button" id="toggleButton">Toggle Labels</button>
               <button class="next-button" id="nextButton">Next</button>
-              <button class="solve-button" id="solveButton">Cheat</button>
+              <button class="toggle-button" id="toggleButton"><i class="fa fa-eye"></i></button>
+              <button class="solve-button" id="solveButton"><i class="fa fa-refresh"></i></button>
             </div>
           </div>
         </div>
@@ -68,6 +68,7 @@
       </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
