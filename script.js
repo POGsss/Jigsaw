@@ -26,65 +26,63 @@ class LoveLetterPuzzle {
         rows: 2,
         cols: 2,
         solution: Array.from({ length: 4 }, (_, i) => i + 1),
-        messageTitle: "Picture 01",
-        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
+        messageTitle: "Family Meeting",
+        messageText: "This was your first time here sa bahay, ininvite ka ni ate sa debut nya tru messenger tas super nervous pa ikaw and unsure if makakapunta ka nyan pero dahil sinundo ka namin wala ka nang nagawa HAHAHAH. Fastforward nung tapos na yung celebration hinatid na namin kayo and sadly di tayo tabi neto since punuan din sa car. This time din super nahihiya ikaw kaya inasar kita sa messenger and dun nalang tayo nagchat HAHAHH grabe din yung sandal mo sa pinto nun parang gusto mo nalang lumabas.",
       },
       {
         rows: 3,
         cols: 3,
         solution: Array.from({ length: 9 }, (_, i) => i + 1),
-        messageTitle: "Picture 02",
-        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
+        messageTitle: "Exchange Gift",
+        messageText: "I wasnt expecting na your gonna surprise me this day I thought we're just going to make a hand painting lang as part of our exchange gift for christmas. Nagbuy pa tayo nun ng materials sa SM before we go here sa bahay tas nung nasa jeep na tayo pinapabasa mo na sakin yung letter mo nun sabi ko mamaya na after natin maggawa nung painting. Yun pala kaya want mo na basahin ko kasi sinasagot mo na pala ko that time, sa sobrang happy ko that time naaksidente pako pauwi pero buti nalang nahatid na kita nun.",
       },
       {
         rows: 4,
         cols: 4,
         solution: Array.from({ length: 16 }, (_, i) => i + 1),
-        messageTitle: "Picture 03",
-        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
+        messageTitle: "Our First Kiss",
+        messageText: "I can still remember the feeling when our lips touched each other, super saya ko that time kasi full na full yung heart ko. Parang nung mga time na to nawala lahat ng mga problems ko hay, we also make graham that time since birthday ni mama mo yun and also end ng 2022 and swear everytime nakakakita me or nakakakain ng graham yung memory nayon na yung naaalala ko. I'm so happy lang na we both give our first kiss with each other and I always tressure it, hoping na ikaw nadin yung last.",
       },
       {
         rows: 5,
         cols: 5,
         solution: Array.from({ length: 25 }, (_, i) => i + 1),
-        messageTitle: "Picture 04",
-        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
+        messageTitle: "Your Birthday!",
+        messageText: "Its your birthday and tbh this time Im super concern about you, nung time na nasa sm palang me and hawak hawak yung gift ko for you wini-wish ko na agad na sana maging happy ikaw sa araw na yun. That day kasi ikaw lang magisa sa bahay nyo nun, may work pa si mama mo nun and si terrence wala din. Kaya hoping me that day na sana mafeel mo padin na birthday mo that time since compared sa previous birthday mo super dami mong bisita then nung dyaan biglang wala kaya di rin me naka ngiti dyan masyado.",
       },
       {
         rows: 6,
         cols: 6,
         solution: Array.from({ length: 36 }, (_, i) => i + 1),
-        messageTitle: "Picture 05",
-        messageText: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga excepturi quidem doloribus reiciendis sit natus, quia beatae itaque! Sunt perspiciatis laudantium iste ipsa corrupti enim iusto saepe eum nisi odio inventore, hic iure omnis cumque maxime officiis voluptate maiores, in, delectus labore fugit animi. A maiores soluta suscipit laudantium.",
+        messageTitle: "Mamu's Birthday!",
+        messageText: "This was mama's birthday and dahil special ka invited ka na naman, Ang ganda ng mga pictures natin dito eh nareveal kung gano ka ka inlove sakin. Super cute mo din nung time na to feeling ko part na ikaw ng family namin, lalo yung nag picture kayo nila ate sa gitna feeling sya may birthday HAHAHHA. Pero medj natakot din me nung time na naguwian na us I thought maiiwan ako sainyo muntik pa me bumalik dun sa place wala na pala sila dun buti nalang talaga nakita ako nila ate nakasabay pa me.",
       },
     ];
 
     // Puzzle Message Properties
     this.transitionMessages = [
       {
-        title: "Congrats 01",
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
+        title: "Keep Going!",
+        text: "Congrats! you've just solve the first puzzle. But let's not celebrate too early there are still 4 puzzles left to solve. Let's try again with this one.",
       },
       {
-        title: "Congrats 02",
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
+        title: "You’re Doing Great",
+        text: "Wow, I've never thought you could solve those 2 puzzle that easy. Now let's try to increase the difficulty a little more. Let's see if we can solve this next puzzle.",
       },
       {
-        title: "Congrats 03",
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
+        title: "Almost There!",
+        text: "Dont stop now, I know it looks hard but look how far you've come! Im sure you'll also solve this one easily. And if you do ill promise to help you in the next one.",
       },
       {
-        title: "Congrats 04",
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos id possimus at quam et, officiis nisi optio, ut fugiat dolorum obcaecati assumenda velit hic!",
+        title: "Let's Solve This Together",
+        text: "I know it looks complicated but just like I said earlier Im gonna help you with this one, Ive put some magical button below that lets you see the correct order of each pieces.",
       },
     ];
     
     // Basic Properties
     this.currentPuzzleState = [];
-    this.currentPuzzle = 0;
-    this.hintDelay = 5000;
-    this.hintTimeout = null;
     this.selectedPiece = null;
+    this.currentPuzzle = 0;
     this.init();
   }
 
@@ -96,14 +94,14 @@ class LoveLetterPuzzle {
 
   // Create Puzzle Function
   createPuzzle() {
-    clearTimeout(this.hintTimeout);
-
     const nextButton = document.getElementById("nextButton");
     const toggleButton = document.getElementById("toggleButton");
+    const solveButton = document.getElementById("solveButton");
     const puzzleBoard = document.getElementById("puzzleBoard");
 
     toggleButton.disabled = true;
     nextButton.disabled = true;
+    solveButton.disabled = true;
     puzzleBoard.innerHTML = "";
     puzzleBoard.classList.remove("correct");
 
@@ -140,11 +138,11 @@ class LoveLetterPuzzle {
       puzzleBoard.appendChild(piece);
     });
 
-    this.hintTimeout = setTimeout(() => {
-      if (!puzzleBoard.classList.contains("correct")) {
-        toggleButton.disabled = false;
-      }
-    }, this.hintDelay);
+    if (this.currentPuzzle + 1 === this.puzzlesData.length) {
+      toggleButton.disabled = false;
+    } else {
+      toggleButton.disabled = true;
+    }
   }
 
   // Auto Solve Puzzle Function
@@ -338,7 +336,7 @@ class LoveLetterPuzzle {
 
   // Trigger Confetti Function
   triggerConfetti() {
-    const duration = 2500;
+    const duration = 1500;
     const end = Date.now() + duration;
 
     const colors = ["#ffffff", "#ffc756", "#d1193e"];
@@ -371,7 +369,7 @@ class LoveLetterPuzzle {
 
   // Trigger Final Confetti Function
   triggerFinalConfetti() {
-    const duration = 5000;
+    const duration = 3000;
     const animationEnd = Date.now() + duration;
     const defaults = {
       origin: { y: 0 },

@@ -283,6 +283,10 @@ body {
   visibility: hidden;
 }
 
+.solve-button:disabled {
+  visibility: hidden;
+}
+
 .final-letter {
   display: none;
   background: #fae8ec;
